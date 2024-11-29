@@ -13,13 +13,15 @@ while True:
 
 
 while True:
-    message = input("Enter message you want to send (Enter to exit): ")
-    if message:
+    message = input("1. What is the average moisture inside my kitchen fridge in the past three hours?\n2. What is the average water consumption per cycle in my smart dishwasher?\n3. Which device consumed more electricity among my three IoT devices (two refrigerators and a dishwasher)?\n(Enter 1-3 and 0 to Exit): ")
+    if message == '1' or message == '2' or message == '3':
         TCPSocket.sendall(message.encode())
         serverResponse = TCPSocket.recv(1024)
         print(f'Server Response: "{serverResponse.decode()}"')
-    else:
+    elif message == '0':
         break
+    else:
+        print("Invalid input. Please enter a number between 1 and 3.")
 
 
 TCPSocket.close()
