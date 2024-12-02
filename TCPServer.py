@@ -9,6 +9,7 @@ hostname = socket.gethostname()
 IPaddress = socket.gethostbyname(hostname)
 port = random.randint(1024, 49151)
 
+#establishes the connection
 TCPSocket.bind((IPaddress, port)) 
 TCPSocket.listen(5)
 print(f"IP address of server : {IPaddress}\nPort Number : {port}\nServer listening...")
@@ -166,23 +167,28 @@ while True:
         fridge2_moisture = get_fridge2_moisture(collection)
         myData = f"Fridge1: {fridge1_moisture}%, Fridge2: {fridge2_moisture}%"
         incomingSocket.sendall(myData.encode())
+
     elif myData == '2':
         #Process water consumption per cycle in my smart dishwasher
         dishwasher_water = get_dishwasher_waterconsumption(collection)
         myData = f"{dishwasher_water} gallons per cycle"
         incomingSocket.sendall(myData.encode())
+
     elif myData == '3':
         #process electricity consumption among the IoT devices
         fridge1_electricity = get_fridge1_electricity(collection)
         fridge2_electricity = get_fridge2_electricity(collection)
         dishwasher_electricity = get_dishwasher_electricity(collection)
+
         if fridge1_electricity > fridge2_electricity and fridge1_electricity > dishwasher_electricity:
             myData = f"Fridge1 consumed more electricity: {fridge1_electricity} kWh per load"
         elif fridge2_electricity > fridge1_electricity and fridge2_electricity > dishwasher_electricity:
             myData = f"Fridge2 consumed more electricity: {fridge2_electricity} kWh per load"
         else:
             myData = f"Dishwasher consumed more electricity: {dishwasher_electricity} kWh per load"
+            
         incomingSocket.sendall(myData.encode())
+
     else:
         print("Done")
         break
