@@ -28,9 +28,13 @@ This project demonstrates the use of TCP sockets for communication between a ser
 
 - Python 3.x
 - Socket library (standard in Python, no installation required)
-- PyMongo (Install by running the following command:
+- PyMongo (Install by running the following command)
   ```bash
   python -m pip install pymongo
+  ```
+- Python dotenv (Install by running the following command)
+  ```bash
+  pip install python-dotenv
   ```
   
 ## Setup and Running Instructions
