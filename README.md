@@ -30,7 +30,7 @@ This project demonstrates the use of TCP sockets for communication between a ser
 - Socket library (standard in Python, no installation required)
 - PyMongo (Install by running the following command:
   ```bash
-  pythin -m pip install pymongo
+  python -m pip install pymongo
   ```
   
 ## Setup and Running Instructions
