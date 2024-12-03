@@ -2,6 +2,8 @@ import socket
 import random
 from pymongo import MongoClient
 import time
+import os
+from dotenv import load_dotenv
 
 #Initiates the socket and hostname
 TCPSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,12 +18,14 @@ print(f"IP address of server : {IPaddress}\nPort Number : {port}\nServer listeni
 
 incomingSocket, incomingAdress = TCPSocket.accept()
 
+load_dotenv()
 #MongoDB connection
-username = "jimmytraann"
-password = "hpBSlmHHHj21lO3f"
+username = os.getenv('USERNAME_KEY')
+password = os.getenv('PASSWORD')
 
 #Connection string to connect to the database
 uri = f"mongodb+srv://{username}:{password}@cluster0.4pkfm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+print(uri)
 try:
     client = MongoClient(uri)
     # Access the specific database
