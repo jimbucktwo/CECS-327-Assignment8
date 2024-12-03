@@ -28,7 +28,11 @@ This project demonstrates the use of TCP sockets for communication between a ser
 
 - Python 3.x
 - Socket library (standard in Python, no installation required)
-
+- PyMongo (Install by running the following command:
+  ```bash
+  pythin -m pip install pymongo
+  ```
+  
 ## Setup and Running Instructions
 
 ### 1. Running the Server (`TCPServer.py`)
@@ -37,7 +41,7 @@ This project demonstrates the use of TCP sockets for communication between a ser
     - Open a terminal and navigate to the directory where `TCPServer.py` is located.
     - Run the following command:
       ```bash
-      python TCPServer.py
+      python3 TCPServer.py
       ```
     - The server will print the IP address and port it is listening on.
 
@@ -50,7 +54,7 @@ This project demonstrates the use of TCP sockets for communication between a ser
     - Open a new terminal window and navigate to the directory where `TCPClient.py` is located.
     - Run the following command:
       ```bash
-      python TCPClient.py
+      python3 TCPClient.py
       ```
 
 2. **Connect to the Server**:
