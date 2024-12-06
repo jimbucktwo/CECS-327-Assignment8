@@ -23,7 +23,7 @@ password = "hpBSlmHHHj21lO3f"
 
 #Connection string to connect to the database
 uri = f"mongodb+srv://{username}:{password}@cluster0.4pkfm.mongodb.net/Cluster0?retryWrites=true&w=majority"
-print(uri)
+
 try:
     client = MongoClient(uri)
     # Access the specific database
@@ -61,10 +61,10 @@ def get_fridge2_moisture():
     }
     ])
 
-    if not result:
-        return "No data found in the last three hours"
     
     for i in result:
+        if i['average_moisture'] == None:
+            return "No data found in the last three hours"
         formatted = f"{i['average_moisture'] / 40  * 100:.2f}"
         
         return formatted
@@ -90,10 +90,11 @@ def get_fridge2_electricity():
     }
     ])
 
-    if not result:
-        return "No data found in the last three hours"
     
     for i in result:
+        if i['electricity'] == None:
+            print("No data found in the last three hours")
+            return None
         formatted = f"{i['electricity'] * 120 * 3/1000:.2f}"
         
         return formatted
@@ -119,10 +120,11 @@ def get_fridge1_moisture():
     }
     ])
 
-    if not result:
-        return "No data found in the last three hours"
+    
     
     for i in result:
+        if i['average_moisture'] == None:
+            return "No data found in the last three hours"
         formatted = f"{i['average_moisture'] / 40  * 100:.2f}"
         
         return formatted
@@ -148,10 +150,11 @@ def get_fridge1_electricity():
     }
     ])
 
-    if not result:
-        return "No data found in the last three hours"
     
     for i in result:
+        if i['electricity'] == None:
+            print("No data found in the last three hours")
+            return None
         formatted = f"{i['electricity'] * 120 * 3/1000:.2f}"
         
         return formatted
@@ -178,10 +181,10 @@ def get_dishwasher_waterconsumption():
     }
     ])
 
-    if not result:
-        return "No data found in the last three hours"
     
     for i in result:
+        if i['waterconsumption'] == None:
+            return "No data found in the last three hours"
         formatted = f"{i['waterconsumption']:.2f}"
         
         return formatted
@@ -207,10 +210,11 @@ def get_dishwasher_electricity():
     }
     ])
 
-    if not result:
-        return "No data found in the last three hours"
     
     for i in result:
+        if i['electricity'] == None:
+            print("No data found in the last three hours")
+            return None
         formatted = f"{i['electricity'] * 120 * 3/1000:.2f}"
         
         return formatted
@@ -225,14 +229,20 @@ while True:
         #Process average moisture inside the kitchen fridge in the past three hours
         fridge1_moisture = get_fridge1_moisture()
         fridge2_moisture = get_fridge2_moisture()
-        myData = f"Fridge1: {fridge1_moisture}%, Fridge2: {fridge2_moisture}%"
+        if fridge1_moisture == None or fridge2_moisture == None:
+            myData = "No data found in the last three hours"
+        else:
+            myData = f"Fridge1: {fridge1_moisture}%, Fridge2: {fridge2_moisture}%"
         print(myData)
         incomingSocket.sendall(myData.encode())
 
     elif myData == '2':
         #Process water consumption per cycle in my smart dishwasher
         dishwasher_water = get_dishwasher_waterconsumption()
-        myData = f"{dishwasher_water} gallons per cycle"
+        if dishwasher_water == None:
+            myData = "No data found in the last three hours"
+        else:
+            myData = f"{dishwasher_water} gallons per cycle"
         print(myData)
         incomingSocket.sendall(myData.encode())
 
@@ -242,7 +252,9 @@ while True:
         fridge2_electricity = get_fridge2_electricity()
         dishwasher_electricity = get_dishwasher_electricity()
 
-        if fridge1_electricity > fridge2_electricity and fridge1_electricity > dishwasher_electricity:
+        if fridge1_electricity == None or fridge2_electricity == None or dishwasher_electricity == None:
+            myData = "No data found in the last three hours"
+        elif fridge1_electricity > fridge2_electricity and fridge1_electricity > dishwasher_electricity:
             myData = f"Fridge1 consumed more electricity: {fridge1_electricity} kWh per load"
         elif fridge2_electricity > fridge1_electricity and fridge2_electricity > dishwasher_electricity:
             myData = f"Fridge2 consumed more electricity: {fridge2_electricity} kWh per load"
