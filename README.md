@@ -40,8 +40,6 @@ This project demonstrates the use of TCP sockets for communication between a ser
 ## Setup and Running Instructions
 
 ### 1. Running the Server (`TCPServer.py`)
-    
-## NOTE!! The server accesses the database using environment variables in the env file, which git ignores. To access, you must manually add this file with your username and password.
 
 1. **Run the server script**:
     - Open a terminal and navigate to the directory where `TCPServer.py` is located.
