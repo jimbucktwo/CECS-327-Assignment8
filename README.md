@@ -47,7 +47,7 @@ This project demonstrates the use of TCP sockets for communication between a ser
     - Open a terminal and navigate to the directory where `TCPServer.py` is located.
     - Run the following command:
       ```bash
-      python (or python3) TCPServer.py
+      python TCPServer.py
       ```
     - The server will print the IP address and port it is listening on.
 
@@ -60,7 +60,7 @@ This project demonstrates the use of TCP sockets for communication between a ser
     - Open a new terminal window and navigate to the directory where `TCPClient.py` is located.
     - Run the following command:
       ```bash
-      python (or python3) TCPClient.py
+      python TCPClient.py
       ```
 
 2. **Connect to the Server**:
