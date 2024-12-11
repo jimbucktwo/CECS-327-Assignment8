@@ -1,5 +1,7 @@
 # TCP Communication - Server and Client
 
+Group members: Jimmy Tran, Santosh Adhikari (Group 15)
+
 This project demonstrates the use of TCP sockets for communication between a server and a client. The server listens for connections and processes specific requests from the client, returning corresponding responses based on the data received.
 
 ## Overview
